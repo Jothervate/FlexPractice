@@ -1,5 +1,31 @@
 # Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+這次的練習除了希望可以練到使用vue3+Tailwindcss進行開發外，我另外也使用gemini+Github Copilot幫我進行生成
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+而生成的提示詞我從原本的"痾...請幫我看看圖片,來根據圖片進行內容生成";轉變成為在自己已經很清楚會使用到的class排版來進行
+
+比如在生成卡片時,為了避免浪費過多時間進行手動輸入代碼,我選擇告訴ai「請根據以下建議來幫我進行開發:
+
+1.卡片元件化要讓整體卡片的外框架div 有 class='flex justify-between'
+
+2.並且在左側justify-start的部分,將圖片放在那裏
+
+3.右側justify-end則是放置內部div位於class='justify-center'的文字說明內容
+
+4.並且幫我把footer的文字可以將日期拆在justify-start的位置;觀看次數與分享則放置在justify-end的位置」
+
+另外,也設計假值資料,讓之後可以串接firebase可以更清楚以外
+
+也能夠更清楚向ai說明自己要如何串接firebase資料,以及如何上傳db.json得內容等等
+
+我真心覺得AI的上限,是取決於開發者個人的精力與經驗
+
+如果開發者能力不強與沒有經驗
+
+是真的很容易被ai帶偏的
+
+我必須承認自己在使用vue3並沒有很熟悉(老實說我是報React專題班;但我還是想要額外挑戰vue3的開發)
+
+讓自己可以習慣這種類專案開發的情境下,也可以寫出自己的感悟
+
+讓自己可以一步步敢有那個底氣去投履歷與毛遂自薦。
