@@ -1,0 +1,21 @@
+/* 1. 引入 Google Fonts (Noto Sans TC) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+
+@import 'tailwindcss';
+
+/* 2. 在 Tailwind v4 的變數系統中定義字體 */
+
+@theme {
+  --font-sans:
+    'Noto Sans TC', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* 3. 強制 body 使用該字體 */
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
