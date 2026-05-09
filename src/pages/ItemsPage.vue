@@ -11,7 +11,7 @@
   // 寫一個 Helper Function (這樣以後重複使用更方便)
   const getImageUrl = (path) => {
     if (!path) return '';
-    return path.startWidth('/') ? `${baseUrl}${path.slice(1)}` : path;
+    return path.startsWith('/') ? `${baseUrl}${path.slice(1)}` : path;
   };
 
   // 狀態管理
