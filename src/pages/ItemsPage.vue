@@ -108,7 +108,11 @@
               :date="article.date"
               :views="article.views"
               :shares="article.shares"
-              :image-url="article.imageUrl"
+              :image-url="
+                article.imageUrl.startsWith('/')
+                  ? `${import.meta.env.BASE_URL}${article.imageUrl.slice(1)}`
+                  : article.imageUrl
+              "
             />
           </template>
 
