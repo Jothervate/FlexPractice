@@ -4,6 +4,16 @@
   import Cards from '../Component/Cards.vue';
 
   import Pages from '../Component/Pages.vue';
+
+  //先把baseUrl定義好，這樣在使用圖片時就不需要每次都寫一大串路徑了
+  const baseUrl = import.meta.env.BASE_URL;
+
+  // 寫一個 Helper Function (這樣以後重複使用更方便)
+  const getImageUrl = (path) => {
+    if (!path) return '';
+    return path.startWidth('/') ? `${baseUrl}${path.slice(1)}` : path;
+  };
+
   // 狀態管理
   const activeCategory = ref('全部');
 
@@ -108,11 +118,7 @@
               :date="article.date"
               :views="article.views"
               :shares="article.shares"
-              :image-url="
-                article.imageUrl.startsWith('/')
-                  ? `${import.meta.env.BASE_URL}${article.imageUrl.slice(1)}`
-                  : article.imageUrl
-              "
+              :image-url="getImageUrl(article.imageUrl)"
             />
           </template>
 
