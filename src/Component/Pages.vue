@@ -1,68 +1,6 @@
-<template>
-  <nav
-    class="m-4 flex items-center justify-center space-x-2 select-none md:justify-end"
-    aria-label="Pagination"
-  >
-    <button
-      @click="changePage(currentPage - 1)"
-      :disabled="currentPage === 1"
-      :class="[
-        'p-2 transition-colors duration-200',
-        currentPage === 1
-          ? 'cursor-not-allowed text-gray-300'
-          : 'cursor-pointer text-black hover:text-gray-600',
-      ]"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-
-    <div v-for="page in totalPages" :key="page" class="flex items-center">
-      <button
-        @click="changePage(page)"
-        :class="[
-          'flex h-10 w-10 items-center justify-center rounded-full text-sm font-medium transition-all duration-200',
-          currentPage === page
-            ? 'bg-black text-white'
-            : 'bg-transparent text-black hover:bg-black hover:text-white',
-        ]"
-      >
-        {{ page }}
-      </button>
-    </div>
-
-    <button
-      @click="changePage(currentPage + 1)"
-      :disabled="currentPage === totalPages"
-      :class="[
-        'p-2 transition-colors duration-200',
-        currentPage === totalPages
-          ? 'cursor-not-allowed text-gray-300'
-          : 'cursor-pointer text-black hover:text-gray-600',
-      ]"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-  </nav>
-</template>
-
 <script setup>
   import { computed, ref } from 'vue';
+  import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
 
   const props = defineProps({
     articles: {
@@ -92,3 +30,50 @@
     }
   };
 </script>
+
+<template>
+  <nav
+    class="m-4 flex items-center justify-center space-x-2 select-none md:justify-end"
+    aria-label="Pagination"
+  >
+    <button
+      @click="changePage(currentPage - 1)"
+      :disabled="currentPage === 1"
+      :class="[
+        'p-2 transition-colors duration-200',
+        currentPage === 1
+          ? 'cursor-not-allowed text-gray-300'
+          : 'cursor-pointer text-black hover:text-gray-600',
+      ]"
+    >
+      <chevron-left class="h-5 w-5" />
+    </button>
+
+    <div v-for="page in totalPages" :key="page" class="flex items-center">
+      <button
+        @click="changePage(page)"
+        :class="[
+          'flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-sm font-medium transition-all duration-200',
+          currentPage === page
+            ? 'bg-black text-white'
+            : 'bg-transparent text-black hover:bg-black hover:text-white',
+        ]"
+      >
+        {{ page }}
+      </button>
+    </div>
+
+    <button
+      @click="changePage(currentPage + 1)"
+      :disabled="currentPage === totalPages"
+      :class="[
+        'p-2 transition-colors duration-200',
+        currentPage === totalPages
+          ? 'cursor-not-allowed text-gray-300'
+          : 'cursor-pointer text-black hover:text-gray-600',
+      ]"
+    >
+      <chevron-right class="h-5 w-5" />
+    </button>
+  </nav>
+</template>
