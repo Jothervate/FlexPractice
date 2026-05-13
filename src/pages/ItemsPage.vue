@@ -90,17 +90,19 @@
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 p-4 md:p-8">
-    <div class="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:gap-6">
+  <div class="min-h-screen bg-gray-50 px-4 py-8">
+    <div
+      class="item-center mx-auto flex max-w-[1296px] flex-col justify-between gap-6 md:flex-row md:gap-6"
+    >
       <!-- 左側：分類選單（Sticky） -->
-      <div class="md:w-64 md:flex-shrink-0">
-        <div class="sticky top-4 md:top-8">
+      <div class="justify-start md:w-64 md:flex-shrink-0">
+        <div class="sticky top-[80px] md:top-8">
           <CategoryMenu v-model="activeCategory" :categories="categories" />
         </div>
       </div>
 
       <!-- 右側：文章卡片列表 -->
-      <div class="flex-1">
+      <div class="flex-1 justify-end">
         <!-- 結果提示 -->
         <h2 class="mb-4 text-lg font-semibold text-gray-900">
           {{ activeCategory === '全部' ? '所有文章' : activeCategory }}
