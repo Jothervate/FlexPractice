@@ -9,6 +9,10 @@
   --font-sans:
     'Noto Sans TC', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --color-brand-brown: #3e2a1d;
+  --color-brand-beige: #faf8f5;
+  --color-brand-light: #ffffff;
 }
 
 /* 3. 強制 body 使用該字體 */
@@ -17,5 +21,60 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.route-shell {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.page-slide-enter-active,
+.page-slide-leave-active {
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
+.page-slide-enter-from {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.page-slide-enter-to,
+.page-slide-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-slide-leave-active {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.page-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-slide-enter-active,
+  .page-slide-leave-active {
+    transition: none;
+  }
+}
+
+/* Service section background helpers */
+@utility service-section {
+  /* 桌機版：寬螢幕時直接完美置中顯示 */
+  @apply bg-cover bg-center bg-no-repeat;
+
+  /* 手機版微調（小於 480px） */
+  @media (max-width: 480px) {
+    /* 關鍵：將 X 軸定位手動指定在 35%（偏左） */
+    /* 這樣就能強制把大側臉和小女生鎖在手機畫面的中央，並把右邊的空牆切掉！ */
+    background-position: 30% center;
   }
 }

@@ -26,12 +26,16 @@
       type: String,
       required: true,
     },
+    to: {
+      type: String,
+      required: true,
+    },
   });
 </script>
 
 <template>
-  <div class="group flex cursor-pointer flex-col gap-[24px] md:flex-row">
-    <div class="w-full flex-shrink-0 overflow-hidden md:w-1/2">
+  <RouterLink :to="to" class="group flex min-w-0 cursor-pointer flex-col gap-[24px] md:flex-row">
+    <div class="w-full flex-shrink-0 md:w-1/2">
       <img
         :src="imageUrl"
         :alt="title"
@@ -70,9 +74,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
-<style scoped>
-  /* 如需進一步自訂樣式，可在此添加 */
-</style>
+<style scoped></style>

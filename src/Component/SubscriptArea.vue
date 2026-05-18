@@ -1,28 +1,36 @@
 <script setup>
+  import { computed } from 'vue';
+  import { assetUrl } from '../utils/assetUrl';
+
   // 1. 使用 defineProps 接收自定義內容
   const props = defineProps({
     bgImage: {
       type: String,
-      default: 'https://example.com/bg.jpg',
+      default: 'subscription_bg.png',
     },
     mainImage: {
       type: String,
-      default: 'https://example.com/laptop.jpg',
+      default: 'subscription.png',
     },
   });
+
+  const resolvedBgImage = computed(() => assetUrl(props.bgImage));
+  const resolvedMainImage = computed(() => assetUrl(props.mainImage));
 </script>
 
 <template>
-  <section
-    class="relative flex w-full flex-col justify-center overflow-hidden bg-gray-900 text-white md:px-4"
-  >
+  <section class="relative flex w-full flex-col justify-center bg-gray-900 text-white md:px-4">
     <div class="absolute inset-0 z-0 opacity-40">
-      <img :src="bgImage" class="h-full w-full object-cover" alt="background" />
+      <img :src="resolvedBgImage" class="h-full w-full object-cover" alt="background" />
     </div>
 
     <div class="relative z-10 mx-auto flex w-full max-w-[1296px] flex-col md:flex-row">
       <div class="h-64 w-full md:h-auto md:w-1/2">
-        <img :src="mainImage" class="h-full w-full object-cover" alt="Subscription Illustration" />
+        <img
+          :src="resolvedMainImage"
+          class="h-full w-full object-cover"
+          alt="Subscription Illustration"
+        />
       </div>
 
       <div class="flex w-full flex-col items-start justify-center p-8 md:w-1/2 md:p-16">
@@ -51,3 +59,4 @@
     </div>
   </section>
 </template>
+<style scoped></style>

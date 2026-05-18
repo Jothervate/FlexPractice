@@ -1,0 +1,31 @@
+
+> homework1@0.0.0 dev
+> vite --host 127.0.0.1 --port 5174 --strictPort
+
+
+  [32m[1mVITE[22m v8.0.11[39m  [2mready in [0m[1m1441[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5174[22m/FlexPractice/[39m
+[2m上午8:27:39[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/blogs/blogsLink.vue, /src/style.css[22m
+[2m上午8:27:50[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/blogs/blogsLink.vue, /src/style.css[22m
+[2m上午8:31:28[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/blogs/article.vue, /src/style.css[22m
+[2m上午8:41:24[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/Menu.vue, /src/style.css[22m
+[2m上午9:03:45[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mrouter.js[22m
+[2m上午9:05:33[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.vue, /src/style.css[22m
+[2m上午9:05:41[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/style.css[22m
+[2m上午9:07:28[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mrouter.js[22m
+[2m上午9:11:59[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/home/homeHeader.vue, /src/style.css[22m
+[2m上午9:12:19[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/SubscriptArea.vue, /src/style.css[22m
+[2m上午9:12:26[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/home/ProjectCard.vue, /src/style.css[22m
+[2m上午9:12:33[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/home/BlogsCard.vue, /src/style.css[22m
+[2m上午9:12:39[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/server/entries.vue, /src/style.css[22m
+[2m上午9:12:44[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/server/example.vue, /src/style.css[22m
+[2m上午9:13:00[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/blogPage.vue, /src/style.css[22m
+[2m上午9:13:09[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/blogPage.vue, /src/style.css[22m
+[2m上午9:13:12[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/blogPage.vue, /src/style.css[22m
+[2m上午9:13:17[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/blogs/blogsLink.vue, /src/style.css[22m
+[2m上午9:13:23[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/blogs/HeaderArea.vue, /src/style.css[22m
+[2m上午9:13:38[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/blogs/article.vue, /src/style.css[22m
+[2m上午9:13:42[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/blogs/article.vue, /src/style.css[22m
+[2m上午9:13:52[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/Component/blogs/article.vue, /src/style.css[22m
+[2m上午9:13:56[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mindex.html[22m

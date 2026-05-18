@@ -1,21 +1,20 @@
 <script setup>
+  import { RouterView } from 'vue-router';
   import Menu from './Component/Menu.vue';
-  import HeaderArea from './Component/HeaderArea.vue';
-  import ItemsPage from './pages/ItemsPage.vue';
-  import SubscriptArea from './Component/SubscriptArea.vue';
   import Contact from './Component/Contact.vue';
 </script>
 
 <template>
   <Menu />
-  <HeaderArea
-    imageUrl="blog_banner.png"
-    title="BLOGS"
-    subtitle="部落格"
-    filterMode="dark"
-    filterStrength="50"
-  />
-  <ItemsPage />
-  <SubscriptArea bgImage="subscription_bg.png" mainImage="subscription.png" />
+
+  <!-- 路由匹配到的元件（homePage 或 ItemsPage）會渲染在這裡 -->
+  <main class="route-shell min-h-screen">
+    <RouterView v-slot="{ Component, route }">
+      <Transition name="page-slide">
+        <component :is="Component" :key="route.fullPath" />
+      </Transition>
+    </RouterView>
+  </main>
+
   <Contact />
 </template>

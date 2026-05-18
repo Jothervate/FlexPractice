@@ -1,18 +1,16 @@
 <script setup>
   import { ref, computed } from 'vue';
-  import CategoryMenu from '../Component/CategoryMenu.vue';
-  import Cards from '../Component/Cards.vue';
 
-  import Pages from '../Component/Pages.vue';
+  import HeaderArea from '../Component/blogs/HeaderArea.vue';
+  import CategoryMenu from '../Component/blogs/CategoryMenu.vue';
+  import Cards from '../Component/blogs/Cards.vue';
+  import Pages from '../Component/blogs/Pages.vue';
+  import SubscriptArea from '../Component/SubscriptArea.vue';
+  import { assetUrl } from '../utils/assetUrl';
 
   //先把baseUrl定義好，這樣在使用圖片時就不需要每次都寫一大串路徑了
-  const baseUrl = import.meta.env.BASE_URL;
 
   // 寫一個 Helper Function (這樣以後重複使用更方便)
-  const getImageUrl = (path) => {
-    if (!path) return '';
-    return path.startsWith('/') ? `${baseUrl}${path.slice(1)}` : path;
-  };
 
   // 狀態管理
   const activeCategory = ref('全部');
@@ -38,6 +36,7 @@
       categories: ['UIUX 設計', '網頁設計', '前端技術'],
       imageUrl: '/blog_1.png',
       date: 'Oct 16, 2022',
+      path: '/blog/1',
       views: 110,
       shares: 2,
     },
@@ -47,6 +46,7 @@
       categories: ['UIUX 設計', '設計規範', '前端技術'],
       imageUrl: '/blog_2.png',
       date: 'Oct 16, 2022',
+      path: '/blog/2',
       views: 110,
       shares: 2,
     },
@@ -57,6 +57,7 @@
       categories: ['品牌設計', '平面設計', 'UIUX 設計'],
       imageUrl: '/blog_3.png',
       date: 'Oct 16, 2022',
+      path: '/blog/3',
       views: 110,
       shares: 2,
     },
@@ -66,6 +67,7 @@
       categories: ['UIUX 設計', '前端技術', 'AI 趨勢應用'],
       imageUrl: '/blog_4.png',
       date: 'Oct 16, 2022',
+      path: '/blog/4',
       views: 110,
       shares: 2,
     },
@@ -75,6 +77,7 @@
       categories: ['前端技術', '後端架構', 'AI 趨勢應用'],
       imageUrl: '/blog_5.png',
       date: 'Oct 16, 2022',
+      path: '/blog/5',
       views: 110,
       shares: 2,
     },
@@ -90,19 +93,27 @@
 </script>
 
 <template>
+  <HeaderArea
+    :image-url="assetUrl('blog_banner.png')"
+    title="BLOGS"
+    subtitle="部落格"
+    bg-text="BLOGS"
+    filter-mode="dark"
+    :filter-strength="50"
+  />
   <div class="min-h-screen bg-gray-50 px-4 py-8">
     <div
       class="item-center mx-auto flex max-w-[1296px] flex-col justify-between gap-6 md:flex-row md:gap-6"
     >
       <!-- 左側：分類選單（Sticky） -->
-      <div class="justify-start md:w-64 md:flex-shrink-0">
+      <div class="min-w-0 justify-start md:w-64 md:flex-shrink-0">
         <div class="sticky top-[80px] md:top-8">
           <CategoryMenu v-model="activeCategory" :categories="categories" />
         </div>
       </div>
 
       <!-- 右側：文章卡片列表 -->
-      <div class="flex-1 justify-end">
+      <div class="min-w-0 flex-1 justify-end">
         <!-- 結果提示 -->
         <h2 class="mb-4 text-lg font-semibold text-gray-900">
           {{ activeCategory === '全部' ? '所有文章' : activeCategory }}
@@ -115,12 +126,13 @@
             <Cards
               v-for="article in filteredArticles"
               :key="article.id"
+              :to="article.path"
               :title="article.title"
               :categories="article.categories"
               :date="article.date"
               :views="article.views"
               :shares="article.shares"
-              :image-url="getImageUrl(article.imageUrl)"
+              :image-url="assetUrl(article.imageUrl)"
             />
           </template>
 
@@ -152,8 +164,7 @@
       </div>
     </div>
   </div>
+  <SubscriptArea />
 </template>
 
-<style scoped>
-  /* 自訂樣式區域 */
-</style>
+<style scoped></style>
