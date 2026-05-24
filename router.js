@@ -3,6 +3,8 @@ import homePage from './src/pages/homepage.vue';
 import serverPage from './src/pages/serverPage.vue';
 import projectPage from './src/pages/projectPage.vue';
 import blogPage from './src/pages/blogPage.vue';
+import ConnectPage from './src/pages/ConnectPage.vue';
+import NotFoundPage from './src/pages/404Page.vue';
 import article from './src/Component/blogs/article.vue';
 
 const routes = [
@@ -10,7 +12,9 @@ const routes = [
   { path: '/server', component: serverPage },
   { path: '/project', component: projectPage },
   { path: '/blog', component: blogPage },
+  { path: '/contact', component: ConnectPage },
   { path: '/blog/4', component: article },
+  { path: '/:pathMatch(.*)*', component: NotFoundPage },
 ];
 
 const scrollToTop = () => {

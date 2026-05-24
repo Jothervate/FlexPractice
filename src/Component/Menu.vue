@@ -29,7 +29,7 @@
 <template>
   <header
     class="sticky top-0 z-30 w-full transition-colors duration-200"
-    :class="isMenuOpen ? 'bg-brand-beige' : 'bg-white shadow-sm'"
+    :class="isMenuOpen ? 'bg-brand-[#FDF7F1]' : 'bg-white shadow-sm'"
   >
     <div
       class="mx-auto flex h-16 w-full items-center justify-between px-2 md:h-auto md:max-w-[1296px] md:px-0 md:py-4"
@@ -41,7 +41,7 @@
       <nav>
         <div
           class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full transition-colors duration-200 md:hidden"
-          :class="isMenuOpen ? 'border border-black/60' : 'border border-black/50'"
+          :class="isMenuOpen ? 'border border-black/60' : 'border border-black/0'"
           @click="toggleMenu"
         >
           <Menu :size="24" :stroke-width="1.5" />
