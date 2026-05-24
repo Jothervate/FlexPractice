@@ -1,5 +1,5 @@
 <script setup>
-  import { computed, ref } from 'vue';
+  import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
   import { LayoutTemplate, Monitor, PaintBucket, Server } from 'lucide-vue-next';
   import { assetUrl } from '../../utils/assetUrl';
 
@@ -7,6 +7,10 @@
     bgImage: {
       type: String,
       default: 'service/service_banner.png',
+    },
+    mobileBgImage: {
+      type: String,
+      default: 'service/mobile/service_banner.png',
     },
     bgOpacity: {
       type: Number,
@@ -47,13 +51,34 @@
     });
   };
 
+  const isMobile = ref(false);
+  let mediaQuery = null;
+
+  const updateIsMobile = () => {
+    isMobile.value = mediaQuery?.matches ?? false;
+  };
+
+  onMounted(() => {
+    mediaQuery = window.matchMedia('(max-width: 767px)');
+    updateIsMobile();
+    mediaQuery.addEventListener('change', updateIsMobile);
+  });
+
+  onBeforeUnmount(() => {
+    mediaQuery?.removeEventListener('change', updateIsMobile);
+  });
+
   const resolvedBgImage = computed(() => assetUrl(props.bgImage));
+  const resolvedMobileBgImage = computed(() => assetUrl(props.mobileBgImage));
+  const currentBgImage = computed(() =>
+    isMobile.value ? resolvedMobileBgImage.value : resolvedBgImage.value,
+  );
 </script>
 
 <template>
   <section
     :style="{
-      backgroundImage: `linear-gradient(rgba(0,0,0,${props.bgOpacity / 100}), rgba(0,0,0,${props.bgOpacity / 100})), url(${resolvedBgImage})`,
+      backgroundImage: `linear-gradient(rgba(0,0,0,${props.bgOpacity / 100}), rgba(0,0,0,${props.bgOpacity / 100})), url(${currentBgImage})`,
     }"
     class="service-section bg-brand-brown flex flex-col items-center border-b border-white/20 px-3 py-10 text-center md:px-10 md:py-20"
   >

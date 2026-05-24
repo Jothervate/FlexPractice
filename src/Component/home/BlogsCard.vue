@@ -39,18 +39,24 @@
 <template>
   <!-- 統一的部落格小卡片 (卡片 1) -->
   <div
-    class="flex w-[85%] min-w-[280px] flex-none snap-start flex-col rounded-none bg-white shadow-sm md:w-1/3 md:min-w-[0]"
+    class="group flex w-[85%] min-w-[280px] flex-none cursor-pointer snap-start flex-col rounded-none bg-white shadow-sm md:w-1/3 md:min-w-[0]"
   >
     <!-- 圖片區域 -->
-    <div class="aspect-[4/3] w-full bg-gray-200">
-      <img :src="resolvedImgSrc" alt="Blog Image" class="h-full w-full object-cover" />
+    <div class="aspect-[4/3] w-full overflow-hidden bg-gray-200">
+      <img
+        :src="resolvedImgSrc"
+        alt="Blog Image"
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 group-active:scale-105"
+      />
     </div>
     <!-- 文字區域 -->
     <div class="flex flex-grow flex-col p-5">
       <p class="mb-3 text-xs tracking-wide text-gray-500">
         {{ props.type.join(' · ') }}
       </p>
-      <h3 class="mb-3 line-clamp-2 text-lg leading-snug font-bold md:text-xl">
+      <h3
+        class="mb-3 line-clamp-2 text-lg leading-snug font-bold transition-colors duration-200 group-focus-within:text-[#007fff] group-hover:text-[#007fff] group-active:text-[#007fff] md:text-xl"
+      >
         {{ props.title }}
       </h3>
       <p class="mb-6 line-clamp-2 text-sm text-gray-600">

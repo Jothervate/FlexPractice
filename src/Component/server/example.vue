@@ -66,7 +66,7 @@
                 </div>
 
                 <h3
-                  class="group-hover:text-brand-brown text-[24px] leading-[1.35] font-bold text-[#333333] transition-colors duration-200"
+                  class="text-[24px] leading-[1.35] font-bold text-[#333333] transition-colors duration-200 group-hover:text-[#007fff] group-active:text-[#007fff] group-focus-within:text-[#007fff]"
                 >
                   {{ work.title }}
                 </h3>

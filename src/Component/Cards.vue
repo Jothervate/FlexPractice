@@ -1,7 +1,7 @@
 <script setup>
   import { computed } from 'vue';
   import { Eye, Share2 } from 'lucide-vue-next';
-  import { assetUrl } from '../../utils/assetUrl';
+  import { assetUrl } from '../utils/assetUrl';
 
   const props = defineProps({
     title: {
@@ -28,18 +28,14 @@
       type: String,
       required: true,
     },
-    to: {
-      type: String,
-      required: true,
-    },
   });
 
   const resolvedImageUrl = computed(() => assetUrl(props.imageUrl));
 </script>
 
 <template>
-  <RouterLink :to="to" class="group flex min-w-0 cursor-pointer flex-col gap-[24px] md:flex-row">
-    <div class="w-full flex-shrink-0 md:w-1/2">
+  <div class="group flex cursor-pointer flex-col gap-[24px] md:flex-row">
+    <div class="w-full flex-shrink-0 overflow-hidden md:w-1/2">
       <img
         :src="resolvedImageUrl"
         :alt="title"
@@ -78,7 +74,9 @@
         </div>
       </div>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+  /* 如需進一步自訂樣式，可在此添加 */
+</style>
