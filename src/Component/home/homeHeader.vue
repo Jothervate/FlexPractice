@@ -1,5 +1,5 @@
 <script setup>
-  import { computed } from 'vue';
+  import { computed, ref } from 'vue';
   import { assetUrl } from '../../utils/assetUrl';
 
   const props = defineProps({
@@ -17,10 +17,41 @@
   const decoraOneSrc = computed(() => assetUrl('home/index_decora_1.png'));
   const decoraTwoSrc = computed(() => assetUrl('home/index_decora_2.png'));
   const decoraThreeSrc = computed(() => assetUrl('home/index_decora_3.png'));
+  const parallaxX = ref(0);
+
+  const parallaxStyle = computed(() => ({
+    '--parallax-x': `${parallaxX.value}px`,
+  }));
+
+  const handlePointerMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const pointerRatio = (event.clientX - rect.left) / rect.width;
+
+    if (pointerRatio <= 0.3) {
+      parallaxX.value = -18;
+      return;
+    }
+
+    if (pointerRatio >= 0.7) {
+      parallaxX.value = 18;
+      return;
+    }
+
+    parallaxX.value = 0;
+  };
+
+  const resetParallax = () => {
+    parallaxX.value = 0;
+  };
 </script>
 
 <template>
-  <section class="home-header">
+  <section
+    class="home-header"
+    :style="parallaxStyle"
+    @pointermove="handlePointerMove"
+    @pointerleave="resetParallax"
+  >
     <div class="home-header__inner">
       <img
         class="home-header__decora home-header__flower home-header__flower--left"
@@ -88,6 +119,7 @@
 
 <style scoped>
   .home-header {
+    --parallax-x: 0px;
     width: 100%;
     overflow-x: hidden;
     background: #fdf7f1;
@@ -205,6 +237,8 @@
     z-index: 3;
     pointer-events: none;
     user-select: none;
+    will-change: transform;
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .home-header__flower {
@@ -216,11 +250,13 @@
   .home-header__flower--left {
     top: 72px;
     left: 72px;
+    transform: translateX(var(--parallax-x));
   }
 
   .home-header__flower--right {
     top: 220px;
     right: 44px;
+    transform: translateX(calc(var(--parallax-x) * -1));
   }
 
   .home-header__flower--copy {
@@ -229,6 +265,7 @@
     width: 78px;
     height: 78px;
     opacity: 0.48;
+    transform: translateX(calc(var(--parallax-x) * 0.65));
   }
 
   .home-header__shape {
@@ -240,6 +277,7 @@
     left: 496px;
     width: 200px;
     height: auto;
+    transform: translateX(calc(var(--parallax-x) * 0.8));
   }
 
   .home-header__shape--bottom {
@@ -247,6 +285,7 @@
     bottom: 78px;
     width: 160px;
     height: auto;
+    transform: translateX(calc(var(--parallax-x) * -0.8));
   }
 
   .home-header__dash {
@@ -262,7 +301,7 @@
     height: 110px;
     border-top: 2px dashed #f2b977;
     border-radius: 50%;
-    transform: rotate(-13deg);
+    transform: translateX(calc(var(--parallax-x) * 0.45)) rotate(-13deg);
   }
 
   .home-header__dash--copy {
@@ -272,7 +311,7 @@
     height: 95px;
     border-bottom: 2px dashed #f2b977;
     border-radius: 50%;
-    transform: rotate(-18deg);
+    transform: translateX(calc(var(--parallax-x) * 0.45)) rotate(-18deg);
   }
 
   @media (max-width: 1180px) {
@@ -318,6 +357,10 @@
   }
 
   @media (max-width: 767px) {
+    .home-header__decora {
+      transition: none;
+    }
+
     .home-header {
       border-bottom: 1px solid #d9d0c8;
     }
@@ -396,7 +439,7 @@
       width: 132px;
       height: 72px;
       border-bottom-width: 1px;
-      transform: rotate(-10deg);
+      transform: translateX(calc(var(--parallax-x) * 0.45)) rotate(-10deg);
     }
   }
 </style>

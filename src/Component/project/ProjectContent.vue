@@ -15,7 +15,7 @@
   const image = computed(() => assetUrl(props.project.imgSrc));
   const mobileImage = computed(() => assetUrl(props.project.mobileImgSrc || props.project.imgSrc));
   const categoryText = computed(() => props.project.categories?.join(' / ') || '');
-  const designRule = computed(() => props.project.rule?.join('、') || '尚未設定設計規則');
+  const designRule = computed(() => props.project.rule?.join('、') || categoryText.value);
   const tools = computed(() => props.project.tools || 'Bootstrap、Javascript');
 
   onMounted(() => {
@@ -29,82 +29,66 @@
 
 <template>
   <div class="project-content-dialog fixed inset-0 z-[80] bg-transparent">
-    <!-- 黑色遮罩 -->
     <div class="modal-backdrop pointer-events-none fixed top-0 bottom-0 left-0 bg-black/60"></div>
 
-    <!-- Modal 內容區 -->
     <div
-      class="project-content-scroll fixed inset-0 z-[81] overflow-y-auto px-0 py-[36px] md:px-[40px]"
+      class="project-content-scroll fixed inset-0 z-[81] overflow-y-auto px-0 py-[48px] md:px-[40px] md:py-[36px]"
       @click.self="emit('close')"
     >
-      <div class="mx-auto max-w-[351px] bg-white md:max-w-[1076px]" @click.stop>
-      <!-- X 區域 -->
-      <div class="inside-x-area">
-        <button
-          type="button"
-          class="rounded-full bg-white p-1 text-[#999999] hover:bg-[#1F120C]/10 hover:text-[#1F120C]"
-          @click="emit('close')"
-        >
-          <X class="h-5 w-5 md:h-6 md:w-6" />
-        </button>
-      </div>
-
-      <!-- 圖片區 -->
-      <picture>
-        <source :srcset="image" media="(min-width: 768px)" />
-        <img :src="mobileImage" alt="" class="modal-image" />
-      </picture>
-
-      <!-- 文字內容區 -->
-      <div class="modal-content">
-        <!-- 分類與日期 -->
-        <div class="modal-meta-row">
-          <p>{{ categoryText }}</p>
-          <p>{{ project.date || 'Oct 16, 2022' }}</p>
+      <article class="mx-auto w-[calc(100vw-36px)] bg-white md:w-full md:max-w-[1076px]" @click.stop>
+        <div class="inside-x-area">
+          <button
+            type="button"
+            class="rounded-full bg-white p-1 text-[#999999] hover:bg-[#1F120C]/10 hover:text-[#1F120C]"
+            aria-label="關閉專案內容"
+            @click="emit('close')"
+          >
+            <X class="h-5 w-5 md:h-6 md:w-6" />
+          </button>
         </div>
 
-        <!-- 標題 -->
-        <h2 class="modal-title">
-          {{ project.title }}
-        </h2>
+        <picture>
+          <source :srcset="image" media="(min-width: 768px)" />
+          <img :src="mobileImage" :alt="project.title" class="modal-image" />
+        </picture>
 
-        <!-- 副標 / 摘要 -->
-        <p class="modal-subtitle">
-          {{ project.subtitle || '從品牌識別設計到 RWD 網站開發，打造療癒系植栽購物體驗' }}
-        </p>
+        <div class="modal-content">
+          <div class="modal-meta-row">
+            <p>{{ categoryText }}</p>
+            <p>{{ project.date || 'Oct 16, 2022' }}</p>
+          </div>
 
-        <!-- 內文與專案資訊 -->
-        <div class="modal-detail-grid">
-          <p class="modal-description">
-            {{ project.content || '此區域尚未有內容，請參考專案摘要或聯繫我們以獲取更多資訊。' }}
+          <h2 class="modal-title">
+            {{ project.title }}
+          </h2>
+
+          <p class="modal-subtitle">
+            {{ project.subtitle || project.description }}
           </p>
 
-          <div class="modal-info">
-            <p>設計原則：{{ designRule }}</p>
-            <p>開發方式：{{ tools }}</p>
+          <div class="modal-detail-grid">
+            <p class="modal-description">
+              {{ project.content || project.description }}
+            </p>
+
+            <div class="modal-info">
+              <p>設計原則：{{ designRule }}</p>
+              <p>開發方式：{{ tools }}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- 專案圖片區 -->
-      <div class="modal-display">
-        <img
-          :src="assetUrl(props.project.displayImgSrc || props.project.imgSrc)"
-          alt="專案圖片區"
-          class="w-full"
-        />
-      </div>
-    </div>
+
+        <div class="modal-display">
+          <img :src="assetUrl(project.displayImgSrc || project.imgSrc)" :alt="project.title" class="w-full" />
+        </div>
+      </article>
     </div>
   </div>
 </template>
 
 <style scoped>
-  * {
-    font-family: 'Noto Sans TC', sans-serif;
-  }
-
   .project-content-dialog {
-    --modal-scrollbar-gutter: 20px;
+    --modal-scrollbar-gutter: 0px;
   }
 
   .project-content-scroll {
@@ -134,137 +118,133 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 44px;
-    padding: 0 24px;
+    height: 36px;
+    padding: 0 12px;
     background: #ffffff;
   }
 
-  /* 圖片區 */
   .modal-image {
     display: block;
     width: 100%;
-    height: 280px;
+    height: 194px;
     object-fit: cover;
-    object-position: center 10%;
+    object-position: center center;
   }
 
-  /* 內容區 */
   .modal-content {
     background: #ffffff;
-    padding: 40px;
+    padding: 32px 15px 28px;
   }
 
-  /* 分類 + 日期 */
   .modal-meta-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 16px;
     color: #5f5f5f;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 20px;
   }
 
-  /* 標題 */
+  .modal-meta-row p:last-child {
+    flex-shrink: 0;
+    text-align: right;
+  }
+
   .modal-title {
     color: #3a3a3a;
-    font-size: 28px;
-    line-height: 1.4;
+    font-size: 24px;
+    line-height: 1.45;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
-  /* 副標 */
   .modal-subtitle {
     color: #4f4f4f;
     font-size: 16px;
-    line-height: 1.7;
-    font-weight: 600;
-    margin-bottom: 32px;
+    line-height: 1.75;
+    font-weight: 700;
+    margin-bottom: 24px;
   }
 
-  /* 下方內容 */
   .modal-detail-grid {
     display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 32px;
-    align-items: start;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    color: #666666;
+    font-size: 16px;
+    line-height: 1.85;
   }
 
   .modal-description {
-    color: #666666;
-    font-size: 15px;
-    line-height: 1.9;
+    font-weight: 500;
   }
 
   .modal-info {
-    color: #666666;
-    font-size: 15px;
-    line-height: 1.9;
-    padding-left: 24px;
-    border-left: 1px solid #cfcfcf;
+    border-top: 1px solid #cfcfcf;
+    padding-top: 22px;
+    font-weight: 500;
   }
 
   .modal-display {
-    padding: 80px 40px;
+    padding: 40px 15px;
     background-color: #fdf7f1;
   }
 
-  /* 手機版 */
-  @media (max-width: 767px) {
+  @media (min-width: 768px) {
+    .project-content-dialog {
+      --modal-scrollbar-gutter: 20px;
+    }
+
     .inside-x-area {
-      height: 28px;
-      padding: 0 8px;
+      height: 44px;
+      padding: 0 24px;
     }
 
     .modal-image {
-      height: 154px;
+      height: 280px;
+      object-position: center 10%;
     }
 
     .modal-content {
-      padding: 24px 12px;
+      padding: 40px;
     }
 
     .modal-meta-row {
-      font-size: 10px;
-      margin-bottom: 16px;
+      font-size: 14px;
+      margin-bottom: 24px;
     }
 
     .modal-title {
-      font-size: 18px;
-      line-height: 1.5;
+      font-size: 28px;
+      line-height: 1.4;
       margin-bottom: 12px;
     }
 
     .modal-subtitle {
-      font-size: 12px;
+      font-size: 16px;
       line-height: 1.7;
-      margin-bottom: 20px;
+      margin-bottom: 32px;
     }
 
     .modal-detail-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    .modal-description {
-      font-size: 12px;
-      line-height: 1.8;
+      grid-template-columns: 1fr 360px;
+      gap: 32px;
+      font-size: 15px;
+      line-height: 1.9;
     }
 
     .modal-info {
-      border-left: 0;
-      border-top: 1px solid #cfcfcf;
-      padding-left: 0;
-      padding-top: 20px;
-      font-size: 12px;
-      line-height: 1.8;
+      border-top: 0;
+      border-left: 1px solid #cfcfcf;
+      padding-top: 0;
+      padding-left: 24px;
     }
 
     .modal-display {
-      padding: 40px 12px;
-      gap: 56px;
+      padding: 80px 40px;
     }
   }
 </style>
